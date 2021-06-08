@@ -1,8 +1,8 @@
-# incremental-search
+# crypto-fuzzy-search-react-component
 
 Search your favorite crypto and some of the closest results (using fuzzy search) will show.
 
-![Imgur](https://imgur.com/KiqjsKG)
+![demo](./demo.gif)
 
 [![NPM](https://img.shields.io/npm/v/incremental-search.svg)](https://www.npmjs.com/package/incremental-search) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
