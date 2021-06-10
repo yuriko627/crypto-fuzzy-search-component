@@ -61,6 +61,7 @@
     "dist"
   ],
   "dependencies": {
-    "fuse.js": "^6.4.6"
+    "fuse.js": "^6.4.6",
+    "recharts": "^2.0.9"
   }
 }

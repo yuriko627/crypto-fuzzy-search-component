@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import IncrementalSearchBox from 'incremental-search'
+import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts'
 
 const App = () => {
   React.useEffect(() => {
@@ -7,17 +8,36 @@ const App = () => {
       .then((data: Response) => {
         return data.json()
       })
-      .then((data) => setCoins(data.map((data: any) => data.name)))
+      .then((data) => setCoins(data))
   }, [])
+
   const [coins, setCoins] = React.useState([])
-  const [selectedOption, setSelectedOption] = useState('')
+  const [selectedOption, setSelectedOption] = useState<{
+    name: string
+    symbol: string
+    id: string
+  } | null>(null)
+
+  const [priceData, setPriceData] = useState([])
+
+  React.useEffect(() => {
+    if (selectedOption === null) {
+      return
+    }
+
+    fetch(
+      `https://api.coingecko.com/api/v3/coins/${selectedOption.id}/market_chart?vs_currency=usd&days=30`
+    )
+      .then((data: Response) => {
+        return data.json()
+      })
+      .then((data) => setPriceData(data.prices))
+  }, [selectedOption])
 
   return (
     <div
       style={{
         display: 'flex',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         height: '100vh'
       }}
     >
@@ -25,8 +45,6 @@ const App = () => {
         style={{
           padding: '40px',
           display: 'flex',
-          // justifyContent: 'center',
-          // alignItems: 'center',
           flexDirection: 'column',
           height: '100vh'
         }}
@@ -34,6 +52,7 @@ const App = () => {
         <h2>Search your favorite coin:</h2>
         <IncrementalSearchBox
           options={coins}
+          dataKey='name'
           style={undefined}
           onSelect={setSelectedOption}
         />
@@ -44,7 +63,15 @@ const App = () => {
           width: '100vh'
         }}
       >
-        your favorite coin is: {selectedOption}
+        <h3>Your favorite coin is : {selectedOption && selectedOption.name}</h3>
+        {priceData.length !== 0 && (
+          <LineChart width={500} height={300} data={priceData}>
+            <XAxis dataKey='name' />
+            <YAxis />
+            <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+            <Line type='monotone' dataKey='1' stroke='#8884d8' dot={false} />
+          </LineChart>
+        )}
       </div>
     </div>
   )

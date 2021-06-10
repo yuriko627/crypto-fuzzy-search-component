@@ -5,6 +5,7 @@ import Fuse from 'fuse.js'
 interface Props {
   style: React.CSSProperties | undefined
   options: any[]
+  dataKey: string
   onSelect: any
 }
 
@@ -12,7 +13,7 @@ function IncrementalSearchBox(props: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [searchWords, setSearchWords] = React.useState('')
   const [open, setOpen] = useState(false)
-  const fuse = new Fuse(props.options)
+  const fuse = new Fuse(props.options, { keys: [props.dataKey] })
   const results = fuse.search(searchWords, { limit: 10 })
 
   return (
@@ -57,12 +58,13 @@ function IncrementalSearchBox(props: Props) {
             return (
               <OptionCard
                 style={{ width: '209px' }}
-                optionName={result.item}
-                key={result.item}
+                option={result.item}
+                key={result.item.id}
+                dataKey={props.dataKey}
                 onSelect={(item) => {
                   props.onSelect(item)
                   setOpen(false)
-                  ;(inputRef.current as HTMLInputElement).value = item
+                  ;(inputRef.current as HTMLInputElement).value = item.name
                 }}
               />
             )

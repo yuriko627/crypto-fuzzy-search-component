@@ -3,9 +3,9 @@ import useHover from './useHover'
 
 interface Props {
   style: React.CSSProperties | undefined
-  optionName: string
-  onSelect: (optionName: string) => void
-  key: string
+  option: { [key: string]: string }
+  onSelect: (optionName: { [key: string]: string }) => void
+  dataKey: string
 }
 
 function OptionCard(props: Props) {
@@ -32,16 +32,15 @@ function OptionCard(props: Props) {
         ...hoverStyle,
         ...props.style
       }}
-      onClick={() => props.onSelect(props.optionName)}
+      onClick={() => props.onSelect(props.option)}
     >
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between'
         }}
-        key={props.key}
       >
-        <div>{props.optionName}</div>
+        <div>{props.option[props.dataKey]}</div>
       </div>
     </div>
   )
