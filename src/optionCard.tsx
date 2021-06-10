@@ -2,10 +2,10 @@ import React from 'react'
 
 interface Props {
   style: React.CSSProperties | undefined
-  fruitName: string
+  optionName: string
 }
 
-function FruitsCard(props: Props) {
+function OptionCard(props: Props) {
   return (
     <div
       style={{
@@ -23,9 +23,9 @@ function FruitsCard(props: Props) {
         ...props.style
       }}
     >
-      {props.fruitName}
+      {props.optionName}
     </div>
   )
 }
 
-export default FruitsCard
+export default OptionCard
