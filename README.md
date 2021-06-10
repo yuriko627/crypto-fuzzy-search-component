@@ -1,8 +1,8 @@
-# crypto-fuzzy-search-react-component
+# incremental-searchbox-react-component
 
-Search your favorite crypto and some of the closest results (using fuzzy search) will show.
+Search with a keyword and some of the closest results (using fuzzy search) will show.
 
-![demo](./demo.gif)
+![demo](./incremental-searchbox.gif)
 
 [![NPM](https://img.shields.io/npm/v/incremental-search.svg)](https://www.npmjs.com/package/incremental-search) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -31,29 +31,40 @@ class Example extends Component {
 
 With React hooks
 
-```
-<!-- import React, { useState } from 'react';
-import Select from 'react-select';
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
+```tsx
+import React, { useState } from 'react'
+import IncrementalSearchBox from 'incremental-search'
 
 export default function App() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [coins, setCoins] = React.useState([])
 
   return (
-    <div className="App">
-      <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
+    <div className='App'>
+      <IncrementalSearchBox
+        options={coins}
+        dataKey='name'
+        style={undefined}
+        onSelect={setSelectedOption}
       />
     </div>
-  );
-} -->
+  )
+}
+```
+
+## Running Example in Local
+
+![demo](./incremental-search-example.gif)
+
+```
+npm start
+```
+
+open a different tab
+
+```
+cd example
+npm start
 ```
 
 ## License

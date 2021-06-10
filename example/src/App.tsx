@@ -49,7 +49,7 @@ const App = () => {
           height: '100vh'
         }}
       >
-        <h2>Search your favorite coin:</h2>
+        <h2>Search your favorite crypto:</h2>
         <IncrementalSearchBox
           options={coins}
           dataKey='name'
