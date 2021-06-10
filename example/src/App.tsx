@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import IncrementalSearchBox from 'incremental-search'
 
 const App = () => {
@@ -10,20 +10,42 @@ const App = () => {
       .then((data) => setCoins(data.map((data: any) => data.name)))
   }, [])
   const [coins, setCoins] = React.useState([])
+  const [selectedOption, setSelectedOption] = useState('')
 
   return (
     <div
       style={{
-        padding: '40px',
         display: 'flex',
         // justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
+        // alignItems: 'center',
         height: '100vh'
       }}
     >
-      <h1>Search your favorite coin:</h1>
-      <IncrementalSearchBox options={coins} style={undefined} />
+      <div
+        style={{
+          padding: '40px',
+          display: 'flex',
+          // justifyContent: 'center',
+          // alignItems: 'center',
+          flexDirection: 'column',
+          height: '100vh'
+        }}
+      >
+        <h2>Search your favorite coin:</h2>
+        <IncrementalSearchBox
+          options={coins}
+          style={undefined}
+          onSelect={setSelectedOption}
+        />
+      </div>
+      <div
+        style={{
+          padding: '40px',
+          width: '100vh'
+        }}
+      >
+        your favorite coin is: {selectedOption}
+      </div>
     </div>
   )
 }
